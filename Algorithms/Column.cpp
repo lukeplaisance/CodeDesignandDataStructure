@@ -13,7 +13,8 @@ bool Column::PlaceToken(char token)
 {
 	if(IsFull())
 	{
-		m_Cells->m_Token = token;
+		m_Cells[m_LastOccupied] = Cell(token);
+		m_LastOccupied++;
 		return true;
 	}
 	return false;

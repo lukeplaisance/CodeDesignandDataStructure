@@ -11,7 +11,9 @@ public:
 	ConnectFour(int numCols, int colHeight);
 	ConnectFour();
 	bool Update();
+	void UpdatePlayerOne();
+	void UpdatePlayerTwo();
 	bool PlacePiece(int col);
-	bool CheckVictory();
+	void CheckVictory();
 	void PrintBoard();
 };

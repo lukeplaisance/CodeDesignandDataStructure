@@ -2,7 +2,7 @@
 
 Cell::Cell()
 {
-	m_Token = '\n';
+	m_Token = '\0';
 }
 
 Cell::Cell(char token)
