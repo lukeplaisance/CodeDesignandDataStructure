@@ -1,6 +1,7 @@
 #pragma once
 #include "NodeType.h"
 #include "LinkedListIterator.h"
+#include <assert.h>
 
 template<class Type>
 class LinkListType
@@ -14,13 +15,21 @@ public:
 	const LinkListType<Type>& operator=(const LinkedListType<Type>&);
 	//Initilizes the the list to an empty state
 	//PostCondition: first = NULL, last = NULL, count = 0
-	void InitializeList();
+	void InitializeList()
+	{
+		while(first != NULL)
+		{
+			DestroyLsit();
+		}
+	}
+
 	//function to determin where the list is empty
 	//PostCondition: returns true if the list is empty otherwise it returns false
 	bool IsEmptyList()
 	{
 		return first == NULL;
 	}
+
 	//function to return the number of nodes in the list
 	//Postcondition: none
 	void const Print()
@@ -32,68 +41,129 @@ public:
 			temp = temp->link;
 		}
 	}
+
 	//function to return the length of the nodes in the list
 	//Postcondition: none
-	int Length();
+	int Length()
+	{
+		return count;
+	}
 	//function to delete all the nodes from the list
 	//PostCondition: first = NULL, last = NULL, count = 0
 	void DestroyLsit()
 	{
-		NodeType<Type> *temp = first;
-		while(temp != NULL)
+		NodeType<Type> *temp;
+		while(first != NULL)
 		{
-
+			temp = first;
+			first->link;
+			delete temp;
 		}
+		last = NULL;
+		count = 0;
 	}
+
 	//function to return the first element of the list
-	//Precondition: the must exist and must not be empty
+	//Precondition: they must exist and must not be empty
 	//Postcondition: if the list is empty, the program terminates; otherwise, the first
 	//element of the list is returned
-	Type Front();
+	Type Front()
+	{
+		assert(first != NULL);
+		return first;
+	}
+
 	//function to return the last element of the list
 	//Precondition: the must exist and must not be empty
 	//Postcondition: if the list is empty, the program terminates; otherwise, the last
 	//element of the list is returned
-	Type Back();
+	Type Back()
+	{
+
+		assert(last != NULL);
+		return last;
+	}
+
 	//function to determine whether searchItem is on the list
 	//Postcondition: returns true if searchItem is in the list, otherwise the value
 	//false is returned
-	bool Search(const Type&) const;
+	bool Search(const Type&) const
+	{
+
+	}
+
 	//function to insert newItem at the begining of the list
-	//Postcondition: first points to the nw list, newItem is inserted at the beginning
+	//Postcondition: first points to the new list, newItem is inserted at the beginning
 	//of the list
-	//last points of the lastr node in the list, and count in incremented by 1
-	void InsertFirst(const Type&);
+	//last points of the last node in the list, and count in incremented by 1
+	void InsertFirst(const Type&)
+	{
+		NodeType<Type> *temp;
+		while(first != NULL)
+		{
+			temp = first;
+		}
+	}
+
 	//function to insert newItem at the end of the list
 	//Postcondition: first points to the nw list, newItem is inserted at the end
 	//of the list
 	//last points of the lastr node in the list, and count in incremented by 1
-	void InsertLast(const Type&);
-	//function to delete deleteItem form the list
-	//Precondition: if found, the node containing deleteItem form the list. First
+	void InsertLast(const Type&)
+	{
+
+	}
+
+	//function to delete deleteItem from the list
+	//Precondition: if found, the node containing deleteItem from the list. First
 	// points to the first node, list point to the last node of the updated list,
 	//and counts is decremented by 1
-	void DeleteNode(const Type&);
+	void DeleteNode(const Type&)
+	{
+
+	}
+
 	//function to return an iterator at the begining of the linked list
-	//Postcondition: returns and iterator such that curent is set to first
-	LinkListIterator<Type> Begin();
+	//Postcondition: returns and iterator such that current is set to first
+	LinkListIterator<Type> Begin()
+	{
+		LinkListIterator<Type> *temp;
+		temp->current = first;
+		return first;
+	}
+
 	//function to return an iterator at the end of the linked list
-	//Postcondition: returns and iterator such that curent is set to last
-	LinkListIterator<Type> End();
+	//Postcondition: returns and iterator such that current is set to last
+	LinkListIterator<Type> End()
+	{
+		LinkListIterator<Type> *temp;
+		temp->current = last;
+		return last;
+	}
+
 	//Default Constructor
 	//Initializes the last to an empty state
 	//Postcondition: first = NULL, last = NULL, count = 0
 	LinkListType()
 	{
-		first = last = NULL;
+		first = NULL;
+		last = NULL;
 		count = 0;
 	}
+
 	//copy constructor
-	LinkListType(const LinkListType<Type>&);
+	LinkListType(const LinkListType<Type>&)
+	{
+
+	}
+
 	//destructor
 	//deletes all the nodes from the list
 	//Postcondition: the list object is destroyed
-	~LinkListType();
+	~LinkListType()
+	{
+
+	}
 private:
 	//function to make a copy of otherList
 	//Postcondition: a copy of otherList is created and assigned to this list
