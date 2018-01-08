@@ -109,24 +109,31 @@ public:
 	//last points of the last node in the list, and count in incremented by 1
 	void InsertFirst(const Type&rhs)
 	{
-		NodeType<Type> *temp;
-		while(first != NULL)
-		{
-			temp = first;
-		}
+		NodeType<Type> *newItem = new NodeType<Type>;
+
+		newItem->info = rhs;
+		newItem->link = first;
+		first = newItem;
+		count++;
+		if (count < 1)
+			first = last;
 	}
 
 	//function to insert newItem at the end of the list
-	//Postcondition: first points to the nw list, newItem is inserted at the end
+	//Postcondition: last points to the new list, newItem is inserted at the end
 	//of the list
-	//last points of the lastr node in the list, and count in incremented by 1
-	void InsertLast(const Type&)
+	//last points of the last node in the list, and count in incremented by 1
+	void InsertLast(const Type&rhs)
 	{
-		NodeType<Type> *temp;
-		while (last != NULL)
-		{
-			temp = last;
-		}
+		NodeType<Type> *newItem = new NodeType<Type>;
+
+		newItem->info = rhs;
+		newItem->link = last;
+		last = newItem;
+		last->link = NULL;
+		count++;
+		if (count < 1)
+			first = last;
 	}
 
 	//function to delete deleteItem from the list
@@ -135,11 +142,15 @@ public:
 	//and counts is decremented by 1
 	void DeleteNode(const Type&rhs)
 	{
-		while(first != NULL)
+		NodeType<Type> *deleteItem = new NodeType<Type>;
+		while (first != NULL)
 		{
-			NodeType<Type> *current = new NodeType<Type>;
-
-
+			first = first->info;
+			if (deleteItem->info == rhs)
+			{
+				delete deleteItem;
+				count--;
+			}
 		}
 	}
 
@@ -190,8 +201,7 @@ private:
 	//Postcondition: a copy of otherList is created and assigned to this list
 	void CopyList(const LinkListType<Type>&rhs)
 	{
-		LinkListType<Type> *temp = new LinkListType<Type>;
-
+		LinkListType<Type> *otherList = new LinkListType<Type>;
 
 	}
 };

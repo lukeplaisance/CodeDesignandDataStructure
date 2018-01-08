@@ -1,5 +1,7 @@
 #include "LinkedListIterator.h"
 #include <assert.h>
+#include "LinkListType.h"
+
 int main()
 {
 	NodeType<int> a = { 12 };
