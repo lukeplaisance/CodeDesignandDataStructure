@@ -10,4 +10,5 @@ int main()
 	c.link = NULL;
 	LinkListIterator<int> iter = LinkListIterator<int>(&a);
 	iter.operator++();
+
 }

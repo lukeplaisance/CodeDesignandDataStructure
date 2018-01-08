@@ -7,12 +7,15 @@ template<class Type>
 class LinkListType
 {
 protected:
-	int count; //variable to sotre the number of elements in the list
+	int count; //variable to store the number of elements in the list
 	NodeType<Type> *first; //pointer to the first node of the list
 	NodeType<Type> *last; //pointer to the last node of the list
 public:
 	//Overload the assignment operator
-	const LinkListType<Type>& operator=(const LinkedListType<Type>&);
+	const LinkListType<Type>& operator=(const LinkedListType<Type>&rhs)
+	{
+
+	}
 	//Initilizes the the list to an empty state
 	//PostCondition: first = NULL, last = NULL, count = 0
 	void InitializeList()
@@ -56,7 +59,7 @@ public:
 		while(first != NULL)
 		{
 			temp = first;
-			first->link;
+			first = first->link;
 			delete temp;
 		}
 		last = NULL;
@@ -70,7 +73,7 @@ public:
 	Type Front()
 	{
 		assert(first != NULL);
-		return first;
+		return first->info;
 	}
 
 	//function to return the last element of the list
@@ -79,24 +82,32 @@ public:
 	//element of the list is returned
 	Type Back()
 	{
-
 		assert(last != NULL);
-		return last;
+		return last->info;
 	}
 
 	//function to determine whether searchItem is on the list
 	//Postcondition: returns true if searchItem is in the list, otherwise the value
 	//false is returned
-	bool Search(const Type&) const
+	bool Search(const Type& rhs) const
 	{
-
+		NodeType<Type> *current = new NodeType<Type>;
+		while(first != NULL)
+		{
+			current = first->link;
+			if(current->info == rhs)
+			{
+				return true;
+			}
+			return false;
+		}
 	}
 
 	//function to insert newItem at the begining of the list
 	//Postcondition: first points to the new list, newItem is inserted at the beginning
 	//of the list
 	//last points of the last node in the list, and count in incremented by 1
-	void InsertFirst(const Type&)
+	void InsertFirst(const Type&rhs)
 	{
 		NodeType<Type> *temp;
 		while(first != NULL)
@@ -111,16 +122,25 @@ public:
 	//last points of the lastr node in the list, and count in incremented by 1
 	void InsertLast(const Type&)
 	{
-
+		NodeType<Type> *temp;
+		while (last != NULL)
+		{
+			temp = last;
+		}
 	}
 
 	//function to delete deleteItem from the list
 	//Precondition: if found, the node containing deleteItem from the list. First
-	// points to the first node, list point to the last node of the updated list,
+	// points to the first node, last points to the last node of the updated list,
 	//and counts is decremented by 1
-	void DeleteNode(const Type&)
+	void DeleteNode(const Type&rhs)
 	{
+		while(first != NULL)
+		{
+			NodeType<Type> *current = new NodeType<Type>;
 
+
+		}
 	}
 
 	//function to return an iterator at the begining of the linked list
@@ -152,9 +172,11 @@ public:
 	}
 
 	//copy constructor
-	LinkListType(const LinkListType<Type>&)
+	LinkListType(const LinkListType<Type>&rhs)
 	{
-
+		first = NULL;
+		last = NULL;
+		count = 0;
 	}
 
 	//destructor
@@ -162,10 +184,14 @@ public:
 	//Postcondition: the list object is destroyed
 	~LinkListType()
 	{
-
 	}
 private:
 	//function to make a copy of otherList
 	//Postcondition: a copy of otherList is created and assigned to this list
-	void CopyList(const LinkListType<Type>&);
+	void CopyList(const LinkListType<Type>&rhs)
+	{
+		LinkListType<Type> *temp = new LinkListType<Type>;
+
+
+	}
 };
