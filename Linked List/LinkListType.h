@@ -12,7 +12,7 @@ protected:
 	NodeType<Type> *last; //pointer to the last node of the list
 public:
 	//Overload the assignment operator
-	const LinkListType<Type>& operator=(const LinkedListType<Type>&rhs)
+	const LinkListType<Type>& operator=(const LinkedListType<Type>& other)
 	{
 
 	}
@@ -89,13 +89,13 @@ public:
 	//function to determine whether searchItem is on the list
 	//Postcondition: returns true if searchItem is in the list, otherwise the value
 	//false is returned
-	bool Search(const Type& rhs) const
+	bool Search(const Type& other) const
 	{
 		NodeType<Type> *current = new NodeType<Type>;
 		while(first != NULL)
 		{
 			current = first->link;
-			if(current->info == rhs)
+			if(current->info == other)
 			{
 				return true;
 			}
@@ -107,11 +107,11 @@ public:
 	//Postcondition: first points to the new list, newItem is inserted at the beginning
 	//of the list
 	//last points of the last node in the list, and count in incremented by 1
-	void InsertFirst(const Type&rhs)
+	void InsertFirst(const Type& other)
 	{
 		NodeType<Type> *newItem = new NodeType<Type>;
 
-		newItem->info = rhs;
+		newItem->info = other;
 		newItem->link = first;
 		first = newItem;
 		count++;
@@ -123,11 +123,11 @@ public:
 	//Postcondition: last points to the new list, newItem is inserted at the end
 	//of the list
 	//last points of the last node in the list, and count in incremented by 1
-	void InsertLast(const Type&rhs)
+	void InsertLast(const Type& other)
 	{
 		NodeType<Type> *newItem = new NodeType<Type>;
 
-		newItem->info = rhs;
+		newItem->info = other;
 		newItem->link = last;
 		last = newItem;
 		last->link = NULL;
@@ -140,13 +140,13 @@ public:
 	//Precondition: if found, the node containing deleteItem from the list. First
 	// points to the first node, last points to the last node of the updated list,
 	//and counts is decremented by 1
-	void DeleteNode(const Type&rhs)
+	void DeleteNode(const Type& other)
 	{
 		NodeType<Type> *deleteItem = new NodeType<Type>;
 		while (first != NULL)
 		{
 			first = first->info;
-			if (deleteItem->info == rhs)
+			if (deleteItem->info == other)
 			{
 				delete deleteItem;
 				count--;
@@ -183,11 +183,8 @@ public:
 	}
 
 	//copy constructor
-	LinkListType(const LinkListType<Type>&rhs)
+	LinkListType(const LinkListType<Type>& other)
 	{
-		first = NULL;
-		last = NULL;
-		count = 0;
 	}
 
 	//destructor
@@ -199,9 +196,18 @@ public:
 private:
 	//function to make a copy of otherList
 	//Postcondition: a copy of otherList is created and assigned to this list
-	void CopyList(const LinkListType<Type>&rhs)
+	void CopyList(const LinkListType<Type>& other)
 	{
-		LinkListType<Type> *otherList = new LinkListType<Type>;
+		NodeType<Type>*newNode = new NodeType<Type>;
+		NodeType<Type>*current = new NodeType<Type>;
 
+		DestroyLsit();
+		first->info = current->info;
+		while (current != NULL)
+		{
+			current = newNode->info;
+			newNode->info = other;
+			newNode->link = NULL;
+		}
 	}
 };
