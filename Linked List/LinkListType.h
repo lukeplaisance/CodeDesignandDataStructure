@@ -12,9 +12,12 @@ protected:
 	NodeType<Type> *last; //pointer to the last node of the list
 public:
 	//Overload the assignment operator
-	const LinkListType<Type>& operator=(const LinkedListType<Type>& other)
+	const LinkListType<Type>& operator=(const LinkListType<Type>& other)
 	{
-
+		if (first == other.first)
+			CopyList();
+		else
+			return first;
 	}
 	//Initilizes the the list to an empty state
 	//PostCondition: first = NULL, last = NULL, count = 0
@@ -114,9 +117,10 @@ public:
 		newItem->info = other;
 		newItem->link = first;
 		first = newItem;
+
+		if (count == 0)
+			last = first;
 		count++;
-		if (count < 1)
-			first = last;
 	}
 
 	//function to insert newItem at the end of the list
@@ -128,12 +132,12 @@ public:
 		NodeType<Type> *newItem = new NodeType<Type>;
 
 		newItem->info = other;
-		newItem->link = last;
+		last->link = newItem;
 		last = newItem;
 		last->link = NULL;
-		count++;
-		if (count < 1)
+		if (count == 0)
 			first = last;
+		count++;
 	}
 
 	//function to delete deleteItem from the list
@@ -185,6 +189,8 @@ public:
 	//copy constructor
 	LinkListType(const LinkListType<Type>& other)
 	{
+		first = NULL;
+		CopyList();
 	}
 
 	//destructor
@@ -192,22 +198,28 @@ public:
 	//Postcondition: the list object is destroyed
 	~LinkListType()
 	{
+		delete first;
+		delete last;
+		count = 0;
 	}
-private:
+//private:
 	//function to make a copy of otherList
 	//Postcondition: a copy of otherList is created and assigned to this list
 	void CopyList(const LinkListType<Type>& other)
 	{
-		NodeType<Type>*newNode = new NodeType<Type>;
-		NodeType<Type>*current = new NodeType<Type>;
+		NodeType<Type>*newNode;
+		NodeType<Type>*current;
 
-		DestroyLsit();
-		first->info = current->info;
+		current = other.first;
+		newNode = current;
+		first = newNode;
+		last = newNode;
+		InsertFirst(current->info);
+		current = current->link;
 		while (current != NULL)
 		{
-			current = newNode->info;
-			newNode->info = other;
-			newNode->link = NULL;
+			InsertLast(current->info);
+			current = current->link;
 		}
 	}
 };
