@@ -16,8 +16,8 @@ ConnectFour::ConnectFour(int numCols, int colHeight)
 
 bool ConnectFour::Update()
 {
-	
 
+	return true;
 }
 
 void ConnectFour::UpdatePlayerOne()

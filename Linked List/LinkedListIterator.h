@@ -22,7 +22,7 @@ public:
 	//returns the info contained in the node
 	Type *operator*()
 	{
-		current->info;
+		 return current->info;
 	}
 	//the iterator is advanced to the next node
 	LinkListIterator<Type>operator++()

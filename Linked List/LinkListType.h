@@ -2,6 +2,7 @@
 #include "NodeType.h"
 #include "LinkedListIterator.h"
 #include <assert.h>
+#include <iostream>
 
 template<class Type>
 class LinkListType
@@ -146,15 +147,27 @@ public:
 	//and counts is decremented by 1
 	void DeleteNode(const Type& other)
 	{
-		NodeType<Type> *deleteItem = new NodeType<Type>;
-		while (first != NULL)
+		NodeType<Type> *current = new NodeType<Type>;
+		NodeType<Type> *next = new NodeType<Type>;
+		if(first->info == other)
 		{
-			first = first->info;
-			if (deleteItem->info == other)
+			current = first;
+			first = first->link;
+			delete current;
+			count--;
+			return;
+		}
+		current = first->link;
+		while (current != NULL) {
+			if (current->link->info == other)
 			{
-				delete deleteItem;
+				NodeType<Type> *deleteNode = current->link;
+				current->link = deleteNode->link;
+				delete deleteNode;
 				count--;
+				return;
 			}
+			current = current->link;
 		}
 	}
 
@@ -202,7 +215,7 @@ public:
 		delete last;
 		count = 0;
 	}
-//private:
+private:
 	//function to make a copy of otherList
 	//Postcondition: a copy of otherList is created and assigned to this list
 	void CopyList(const LinkListType<Type>& other)
