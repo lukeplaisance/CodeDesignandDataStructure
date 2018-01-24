@@ -4,14 +4,16 @@
 #include <iostream>
 int main()
 {
-	NodeType<int> a = { 12 };
+	NodeType<int> *a =  new NodeType<int>{ 12 };
 	NodeType<int> b = { 13 };
 	NodeType<int> c = { 14 };
-	LinkListIterator<int> iter = LinkListIterator<int>(&a);
+	a->link = &b;
+	b.link = &c;
+	c.link = NULL;
+	LinkListIterator<int> iter = LinkListIterator<int>(a);
 	iter.operator++();
 	LinkListType<int> *listOne = new LinkListType<int>();
 	LinkListType<int> *listTwo = new LinkListType<int>();
-	listOne->DestroyLsit();
 	listOne->InsertFirst(1);
 	listOne->InsertFirst(2);
 	listOne->InsertFirst(3);
@@ -21,10 +23,10 @@ int main()
 	listOne->DeleteNode(3);
 	listOne->Print();
 
-	assert(a.link == &b);
+	assert(a->link == &b);
 	assert(b.link == &c);
 	assert(c.link == NULL);
-	assert(*iter.operator*() == 12);
+	assert(iter.operator*() == 12);
 	assert(listOne->Length() == 5);
 	assert(listOne->Front() == 5);
 	assert(listOne->Back() == 1);
